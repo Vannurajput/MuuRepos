@@ -1,0 +1,18 @@
+{
+  "_kind": "browser-payload",
+  "_savedAt": "2025-12-20T06:47:00.990Z",
+  "git": {
+    "owner": "Vannurajput",
+    "repo": "MuuRepos",
+    "branch": "main"
+  },
+  "indexKind": "cognitive-canvas-backup-index",
+  "updatedAt": "2025-12-20T06:47:00.968Z",
+  "backups": [
+    {
+      "name": "cognitive-canvas-full-backup-2025-12-20.zip",
+      "path": "cognitive-canvas/backups/data/cognitive-canvas-full-backup-2025-12-20.json",
+      "createdAt": "2025-12-20T06:46:59.139Z"
+    }
+  ]
+}
