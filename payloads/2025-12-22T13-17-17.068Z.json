@@ -1,0 +1,12 @@
+{
+  "_kind": "browser-payload",
+  "_savedAt": "2025-12-22T13:17:17.068Z",
+  "git": {
+    "owner": "Vannurajput",
+    "repo": "MuuRepos",
+    "branch": "main"
+  },
+  "repo": "my-app",
+  "branch": "main",
+  "action": "deploy"
+}
