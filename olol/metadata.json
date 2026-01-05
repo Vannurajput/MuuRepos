@@ -1,0 +1,5 @@
+{
+  "name": "Muul SQL Studio",
+  "description": "A high-performance React SQL editor integrated with Muul browser credential manager, featuring multi-tab editing, data visualization, and direct database execution.",
+  "requestFramePermissions": []
+}
