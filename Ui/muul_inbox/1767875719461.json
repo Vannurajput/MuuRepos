@@ -1,0 +1,9 @@
+{
+  "type": "GIT",
+  "payload": {
+    "repo": "my-app",
+    "branch": "main",
+    "action": "deploy"
+  },
+  "requestId": "req-1767875718498"
+}
