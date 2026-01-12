@@ -1,0 +1,60 @@
+{
+  "type": "PRINT",
+  "payload": {
+    "printer_name": [
+      "EPSON TM-m30 Receipt"
+    ],
+    "item_length": 26,
+    "template": "2",
+    "data": [
+      {
+        "type": "logo",
+        "data": {
+          "url": "https://pos.tradywork.com/images/22bef43a88f72e2a0e57992865302ba4.png"
+        }
+      },
+      {
+        "type": "header",
+        "data": {
+          "top_title": "My Store Name",
+          "bill_no": "13355",
+          "date_of_bill": "3/3/2022"
+        }
+      },
+      {
+        "type": "item",
+        "data": {
+          "itemdata": [
+            {
+              "item_name": "Pizza",
+              "quantity": 1,
+              "price": 44.99,
+              "item_amount": 44.99
+            }
+          ]
+        }
+      },
+      {
+        "type": "bigsummary",
+        "data": {
+          "bigsummary": [
+            {
+              "key": "Total",
+              "value": 44.99
+            }
+          ]
+        }
+      },
+      {
+        "type": "footer",
+        "data": {
+          "align": "center",
+          "footer_text": [
+            "Thank you for your visit!"
+          ]
+        }
+      }
+    ]
+  },
+  "requestId": "req-1768217307305"
+}
