@@ -1,0 +1,102 @@
+{
+  "printer_name": [
+    "192.168.1.77"
+  ],
+  "item_length": 26,
+  "template": "2",
+  "data": [
+    {
+      "type": "logo",
+      "data": {
+        "url": "https://app.esmartpos.com/assets/POS/logo/853560e6414b03d20c64a2ce9b1fc923.png"
+      }
+    },
+    {
+      "type": "header",
+      "data": {
+        "sub_titles": [
+          "Title 1",
+          "Title 2"
+        ],
+        "address": [
+          "#122 downtown"
+        ],
+        "bill_no": "13355",
+        "ticket_no": "10",
+        "date_of_bill": "3/3/2022",
+        "time": "11:32 AM",
+        "employee": "User 1",
+        "till": "Terminal 2",
+        "order_type": "Dine In"
+      }
+    },
+    {
+      "type": "separator",
+      "data": {}
+    },
+    {
+      "type": "item",
+      "data": {
+        "itemdata": [
+          {
+            "item_name": "Orchard Special 3 pizza",
+            "quantity": 1,
+            "price": 44.99,
+            "toppings": [
+              "Sugar",
+              "Extra salt",
+              "Cheese"
+            ]
+          },
+          {
+            "item_name": "French fire",
+            "quantity": 1,
+            "price": 44.99,
+            "toppings": [
+              "Salt",
+              "Extra sauce",
+              "Chilli"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "separator",
+      "data": {}
+    },
+    {
+      "type": "bigsummary",
+      "data": {
+        "bigsummary": [
+          {
+            "key": "Subtotal",
+            "value": 91.95
+          },
+          {
+            "key": "TaxTotal",
+            "value": 5.73
+          },
+          {
+            "key": "Total",
+            "value": 97.68
+          },
+          {
+            "key": "PaidAmount",
+            "value": 97.68
+          }
+        ]
+      }
+    },
+    {
+      "type": "footer",
+      "data": {
+        "align": "center",
+        "footer_text": [
+          "Hotsport development agency"
+        ]
+      }
+    }
+  ],
+  "requestId": "req-1768279370978"
+}
