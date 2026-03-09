@@ -1,0 +1,5 @@
+{
+  "type": "READ_FILE",
+  "path": "test.txt",
+  "requestId": "read_file-1773038370049"
+}
