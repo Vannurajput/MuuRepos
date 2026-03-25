@@ -1,0 +1,6 @@
+{
+  "name": "cpu-features",
+  "version": "0.0.10-stub",
+  "description": "Stub for optional cpu-features native module on Windows",
+  "main": "index.js"
+}

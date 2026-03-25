@@ -1,72 +1,90 @@
 {
-  "name": "@motext/editor",
-  "private": false,
-  "version": "1.0.1",
-  "type": "module",
-  "main": "./dist/motext.umd.cjs",
-  "module": "./dist/motext.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/motext.js",
-      "require": "./dist/motext.umd.cjs"
-    },
-    "./dist/style.css": "./dist/style.css"
-  },
-  "files": [
-    "dist"
-  ],
+  "name": "muulbrowser",
+  "version": "1.1.0",
+  "description": "A minimal Electron-based browser UI.",
+  "author": "Your Name",
+  "main": "src/main/main.js",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "prepare": "npm run build",
-    "test": "vitest",
-    "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "dev": "electron .",
+    "start": "electron .",
+    "clean": "rimraf dist",
+    "postinstall": "electron-builder install-app-deps && node scripts/ensure-cpu-features-stub.js",
+    "ensure:cpu-stub": "node scripts/ensure-cpu-features-stub.js",
+    "build:win": "npm run ensure:cpu-stub && electron-builder --win",
+    "build:scheduler-service": "pkg service-runner/index.js --targets node16-win-x64 --output build/scheduler-service/MuulScheduler.exe",
+    "publish:win": "npm run ensure:cpu-stub && electron-builder --win --publish always",
+    "build:unpacked": "npm run ensure:cpu-stub && electron-builder --dir",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@duckdb/duckdb-wasm": "^1.29.0",
-    "fflate": "^0.8.2"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@aws-sdk/rds-signer": "^3.972.0",
+    "@fontsource/material-icons": "^5.2.7",
+    "@fontsource/roboto": "^5.2.9",
+    "adm-zip": "^0.5.16",
+    "cpu-features": "file:vendor/cpu-features-stub",
+    "cron-parser": "^4.9.0",
+    "electron-log": "^5.4.3",
+    "electron-updater": "^6.7.3",
+    "keytar": "^7.9.0",
+    "mongodb": "^6.10.0",
+    "mssql": "^12.2.0",
+    "mysql2": "^3.13.0",
+    "nan": "^2.19.0",
+    "pg": "^8.13.0",
+    "sqlite3": "^5.1.7",
+    "ssh2": "^1.17.0"
   },
   "devDependencies": {
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@types/dompurify": "^3.0.5",
-    "@types/marked": "^6.0.0",
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-react": "^4.2.1",
-    "dompurify": "^3.3.1",
-    "jsdom": "^28.0.0",
-    "marked": "^12.0.0",
-    "monaco-editor": "^0.49.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.4.4",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0",
-    "vite-plugin-dts": "^3.9.1",
-    "vitest": "^4.0.18"
+    "@babel/core": "^7.28.6",
+    "@babel/preset-env": "^7.28.6",
+    "babel-jest": "^30.2.0",
+    "buildcheck": "^0.0.7",
+    "electron": "^33.2.0",
+    "electron-builder": "^26.0.12",
+    "pkg": "^5.8.0",
+    "jest": "^30.2.0",
+    "rimraf": "^6.0.1"
   },
-  "keywords": [
-    "react",
-    "editor",
-    "code",
-    "text",
-    "monaco",
-    "motext",
-    "component"
-  ],
-  "author": "yogimehla",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yogimehla/MoText.git"
+  "overrides": {
+    "cpu-features": "file:vendor/cpu-features-stub"
   },
-  "license": "MIT"
+  "build": {
+    "appId": "com.muulorigins.muulbrowser",
+    "productName": "MuulBrowser",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "build/icon.ico",
+      "scheduler-service/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "**/preload/**",
+      "**/*.node",
+      "scheduler-service/**"
+    ],
+    
+    "npmRebuild": true,
+    "icon": "build/icon.ico",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Vandanarajput",
+        "repo": "mobrowser-releases"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "include": "build/installer.nsh",
+      "perMachine": true,
+      "allowElevation": true,
+      "oneClick": false
+    }
+  }
 }

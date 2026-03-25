@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en" data-theme="light" data-skin="glass">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Printer Configuration</title>
+  <link rel="stylesheet" href="../assets/themes/light.css" />
+  <link rel="stylesheet" href="../assets/themes/dark.css" />
+  <link rel="stylesheet" href="../assets/skins/classic.css" />
+  <link rel="stylesheet" href="../assets/skins/glass.css" />
+
+  <link rel="stylesheet" href="printer.css" />
+  <script defer src="../assets/styles/fonts-loader.js"></script>
+</head>
+
+<body>
+
+  <div class="page-shell">
+
+    <div class="window-shell">
+
+      <div class="window-header">
+
+        <div class="tabs">
+
+          <button class="tab active" type="button">Config</button>
+
+        </div>
+
+      </div>
+
+
+
+      <section class="panel active">
+
+        <form id="printerForm" class="printer-form">
+
+          <div class="two-col">
+
+            <label>
+
+              Printer name
+
+              <input id="printerName" type="text" placeholder="e.g. Front Desk or 192.168.1.100" required />
+
+            </label>
+
+            <label>
+
+              Printer type
+
+              <select id="printerType" required>
+
+                <option value="">Select type</option>
+
+                <option value="bluetooth">Bluetooth Printer</option>
+
+                <option value="network">Network Printer</option>
+
+              </select>
+
+            </label>
+
+          </div>
+
+
+
+          <div class="two-col">
+            <label id="printerPortRow" class="port-field">
+              Port
+              <input id="printerPort" type="text" placeholder="e.g. 9100" inputmode="numeric" />
+            </label>
+            <label>
+              Printer model
+              <input id="printerModel" type="text" placeholder="e.g. Epson TM-T88" required />
+            </label>
+          </div>
+
+          <div class="two-col">
+            <label>
+              Company name
+              <input id="companyName" type="text" placeholder="e.g. Epson" required />
+            </label>
+            <label>
+              Print Mode
+              <select id="printMode" required>
+                <option value="graphic">Graphic</option>
+                <option value="text">Text</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="primary">Save</button>
+            <button type="button" id="testPrinter" class="ghost">Test</button>
+            <button type="button" id="cancelPrinter" class="ghost">Cancel</button>
+            <p id="connectedStatus" class="status-chip"></p>
+          </div>
+
+
+
+          <p class="note">Printer label will be displayed as connected once saved.</p>
+
+        </form>
+
+      </section>
+
+    </div>
+
+  </div>
+
+  <script type="module" src="../theme/themeBootstrap.js"></script>
+  <script src="printer.js"></script>
+</body>
+
+</html>

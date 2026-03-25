@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-skin="glass">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scheduler</title>
+    <link rel="stylesheet" href="../assets/themes/light.css" />
+    <link rel="stylesheet" href="../assets/themes/dark.css" />
+    <link rel="stylesheet" href="../assets/skins/classic.css" />
+    <link rel="stylesheet" href="../assets/skins/glass.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="../assets/styles/fonts-loader.js"></script>
+  </head>
+  <body>
+    <div class="scheduler-shell">
+      <header class="scheduler-header">
+        <div>
+          <p class="scheduler-kicker">MuBrowser Scheduler Service</p>
+          <h1 class="scheduler-title">Background jobs</h1>
+          <p class="scheduler-subtitle">
+            Jobs are persisted to ProgramData and executed by the Windows Service even when MuBrowser is closed.
+          </p>
+        </div>
+        <div class="scheduler-status" id="schedulerStatus">
+          <span class="pill pill-warn">Service status</span>
+          <span id="schedulerStatusText">Loading…</span>
+        </div>
+      </header>
+
+      <main class="scheduler-grid">
+        <section class="scheduler-card">
+          <header class="card-header">
+            <div>
+              <p class="card-kicker">Create</p>
+              <h2 class="card-title">Add job</h2>
+            </div>
+          </header>
+          <div id="formAlert" class="alert hidden" role="alert"></div>
+          <form id="jobForm" class="job-form">
+            <label class="field">
+              <span>Job name</span>
+              <input type="text" id="jobName" name="name" placeholder="Nightly DB export" required />
+            </label>
+            <label class="field">
+              <span>Job type</span>
+              <select id="jobType" name="type">
+                <option value="github-pull">GitHub pull (zip archive)</option>
+                <option value="db-export">DB export</option>
+                <option value="download">Download</option>
+                <option value="cli">CLI command</option>
+                <option value="trigger">Trigger other jobs</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Every (minutes)</span>
+              <input type="number" id="jobEvery" name="everyMinutes" min="1" value="30" />
+            </label>
+            <label class="field">
+              <span>Cron expression (optional)</span>
+              <input
+                type="text"
+                id="jobCron"
+                name="cron"
+                placeholder="0 3 * * *  (runs at 3:00 AM daily)"
+              />
+              <small class="field-hint">If set, overrides the interval.</small>
+            </label>
+
+            <div id="githubFields" class="field-set hidden" aria-label="GitHub pull settings">
+              <div class="field dual">
+                <div>
+                  <span>Owner</span>
+                  <input type="text" id="ghOwner" placeholder="owner" />
+                </div>
+                <div>
+                  <span>Repository</span>
+                  <input type="text" id="ghRepo" placeholder="repo" />
+                </div>
+              </div>
+              <div class="field">
+                <span>Branch</span>
+                <input type="text" id="ghBranch" placeholder="main" />
+              </div>
+              <div class="field">
+                <span>Personal access token (optional)</span>
+                <input type="password" id="ghToken" placeholder="ghp_xxx" />
+              </div>
+              <div class="field">
+                <span>Output directory</span>
+                <input type="text" id="ghOutput" placeholder="C:\\MuBrowser\\jobs\\github" />
+              </div>
+            </div>
+
+            <div id="dbFields" class="field-set hidden" aria-label="Database export settings">
+              <div class="field dual">
+                <div>
+                  <span>DB type</span>
+                  <input type="text" id="dbType" placeholder="postgres | mysql | mssql" />
+                </div>
+                <div>
+                  <span>Credential ID or name</span>
+                  <input type="text" id="dbCredential" placeholder="credential id / connection name" />
+                </div>
+              </div>
+              <div class="field dual">
+                <div>
+                  <span>Database (optional)</span>
+                  <input type="text" id="dbName" placeholder="override database" />
+                </div>
+                <div>
+                  <span>Output directory</span>
+                  <input type="text" id="dbOutput" placeholder="C:\\MuBrowser\\jobs\\db" />
+                </div>
+              </div>
+              <div class="field">
+                <span>Query</span>
+                <textarea id="dbQuery" rows="3" placeholder="select * from table limit 100"></textarea>
+              </div>
+            </div>
+
+            <div id="downloadFields" class="field-set hidden" aria-label="Download settings">
+              <div class="field">
+                <span>URL</span>
+                <input type="url" id="dlUrl" placeholder="https://example.com/file.zip" />
+              </div>
+              <div class="field dual">
+                <div>
+                  <span>File name</span>
+                  <input type="text" id="dlFileName" placeholder="file.zip" />
+                </div>
+                <div>
+                  <span>Output directory</span>
+                  <input type="text" id="dlOutput" placeholder="C:\\MuBrowser\\jobs\\downloads" />
+                </div>
+              </div>
+            </div>
+
+            <div id="cliFields" class="field-set hidden" aria-label="CLI settings">
+              <div class="field">
+                <span>Command</span>
+                <input type="text" id="cliCommand" placeholder="echo \"Hello\"" />
+              </div>
+              <div class="field dual">
+                <div>
+                  <span>Working directory (optional)</span>
+                  <input type="text" id="cliCwd" placeholder="C:\\MuBrowser\\jobs\\cli" />
+                </div>
+                <div>
+                  <span>Timeout (ms)</span>
+                  <input type="number" id="cliTimeout" placeholder="300000" min="1000" />
+                </div>
+              </div>
+            </div>
+
+            <div id="triggerFields" class="field-set hidden" aria-label="Trigger settings">
+              <div class="field">
+                <span>Target job IDs (comma separated)</span>
+                <input type="text" id="triggerTargets" placeholder="job-id-1, job-id-2" />
+              </div>
+            </div>
+
+            <button type="submit" class="primary-btn">Save job</button>
+          </form>
+        </section>
+
+        <section class="scheduler-card">
+          <header class="card-header">
+            <div>
+              <p class="card-kicker">Jobs</p>
+              <h2 class="card-title">Scheduled jobs</h2>
+            </div>
+          </header>
+          <div id="jobsList" class="jobs-list" aria-live="polite"></div>
+        </section>
+
+        <section class="scheduler-card full-span">
+          <header class="card-header">
+            <div>
+              <p class="card-kicker">Activity</p>
+              <h2 class="card-title">Recent runs</h2>
+            </div>
+          </header>
+          <div id="logList" class="log-list" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="../theme/themeBootstrap.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

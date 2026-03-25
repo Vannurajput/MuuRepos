@@ -1,0 +1,29 @@
+body.popup-body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
+  /* CRITICAL: Disable dragging so clicks reach the buttons in Electron */
+  -webkit-app-region: no-drag !important;
+}
+
+.profile-popover.standalone {
+  position: static;
+  min-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+}
+
+/* Ensure we use the variables from main.css if possible, or define fallbacks */
+:root {
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #0f766e;
+  --border: rgba(148, 163, 184, 0.35);
+  --tab-active: #f8fafc;
+}

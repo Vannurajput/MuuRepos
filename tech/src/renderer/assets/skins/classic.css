@@ -1,0 +1,39 @@
+html[data-skin='classic'] {
+  --chrome-bg: var(--chrome);
+  --chrome-top-bg: var(--chrome-top);
+  --chrome-fade: var(--chrome);
+  --chrome-border-skin: var(--chrome-border);
+  --chrome-backdrop: none;
+  --chrome-top-backdrop: none;
+
+  --app-bg: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  --app-surface: #ffffff;
+  --app-surface-2: #f8fafc;
+  --app-surface-3: #eef2f6;
+  --app-border: #e2e8f0;
+  --app-border-strong: #d6dde7;
+  --app-shadow-sm: 0 6px 18px rgba(16, 24, 40, 0.08);
+  --app-shadow-md: 0 16px 40px rgba(16, 24, 40, 0.12);
+  --app-shadow-lg: 0 26px 60px rgba(16, 24, 40, 0.18);
+  --app-overlay: rgba(15, 23, 42, 0.28);
+}
+
+html[data-theme='dark'][data-skin='classic'] {
+  --chrome-bg: var(--chrome);
+  --chrome-top-bg: var(--chrome-top);
+  --chrome-fade: var(--chrome);
+  --chrome-border-skin: var(--chrome-border);
+  --chrome-backdrop: none;
+  --chrome-top-backdrop: none;
+
+  --app-bg: linear-gradient(180deg, #0f1118 0%, #0f121a 60%, #0a0c14 100%);
+  --app-surface: #151922;
+  --app-surface-2: #1b202b;
+  --app-surface-3: #232a36;
+  --app-border: #2a3140;
+  --app-border-strong: #3a4356;
+  --app-shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.4);
+  --app-shadow-md: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --app-shadow-lg: 0 26px 60px rgba(0, 0, 0, 0.5);
+  --app-overlay: rgba(6, 9, 15, 0.6);
+}

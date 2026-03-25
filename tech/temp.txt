@@ -1,0 +1,53 @@
+# Understanding the MoBrowser Scheduler System
+
+The Scheduler is like a "Silent Assistant" that lives inside your browser. It performs repetitive, boring tasks automatically so you don't have to.
+
+---
+
+## 🌟 The "Simple Version" (How it works in plain English)
+
+Imagine you have a list of tasks (Jobs) in a notebook (`jobs.json`). Every 15 seconds, the browser "wakes up" and looks at your notebook.
+
+1.  **Check the Time**: It looks at the "Next Run" time for every task.
+2.  **It's Time!**: If the time is right, it starts the task (like backing up a database or pulling from GitHub).
+3.  **Record the Result**: It writes down if the task succeeded or failed in a log book (`scheduler.log`).
+4.  **Schedule the Next One**: It does a bit of math to decide when to run the task again (e.g., "Add 60 minutes to right now").
+5.  **Go Back to Sleep**: It waits for another 15 seconds and repeats.
+
+---
+
+## 🏗️ The "Full Technical Breakdown" (How the code is structured)
+
+### 1. The Heart: `serviceEngine.js`
+This is the main loop. It uses a `setInterval` to "tick" every 15 seconds. It handles the logic of reading the jobs, running them one by one, and saving the updated times back to the disk.
+
+### 2. The Smart Logic: `schedule.js`
+This module is the "Clock Maker." It calculates when a job should run next. 
+- **Interval Mode**: It simply adds minutes (e.g., "Run every 10 minutes").
+- **Cron Mode**: It uses a professional pattern like `0 * * * *` which means "Run at the start of every hour."
+
+### 3. The Execution: `jobRunnerFactory.js`
+The scheduler doesn't do the work itself; it hires "Runners":
+- **DB Runner**: Handles data exports and SQL queries.
+- **GitHub Runner**: Syncs your repo code.
+- **CLI Runner**: Runs local terminal commands.
+- **Download Runner**: Grabs files from URLs.
+
+### 4. The Data Guard: `jobsStore.js`
+To make sure your tasks aren't lost if the app crashes, this module saves them to a JSON file. It uses a "Safety First" (Atomic) method: it writes a new file first, and only when it's finished does it replace the old one.
+
+### 5. Running as a "Windows Service"
+This project is special because it can run even if the browser window is closed.
+- **Headless Mode**: The `service-runner/index.js` file allows the scheduler to run without a user interface.
+- **System-Level**: Using the PowerShell scripts in the `scheduler-service` folder, you can tell Windows: *"Start this scheduler every time the computer turns on, even before anyone logs in."*
+
+---
+
+## 📊 Summary: Why this is professional?
+- **It's Crash-Proof**: Thanks to Atomic Writing.
+- **It's Flexible**: You can add any "Worker/Runner" to it.
+- **It's Traceable**: Every action has a timestamped log.
+- **It's Background-Ready**: It can live as a true Windows Service.
+
+---
+*Documentation enhanced for clarity by Antigravity Analysis.*

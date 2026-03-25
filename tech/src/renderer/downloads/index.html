@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- Downloads popup window -->
+<html lang="en" data-theme="light" data-skin="glass">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Downloads</title>
+    <meta http-equiv="Content-Security-Policy"
+      content="default-src 'self' file:;
+               img-src 'self' data: file:;
+               style-src 'self' 'unsafe-inline' file:;
+               script-src 'self' file:;" />
+    <link rel="stylesheet" href="../assets/themes/light.css" />
+    <link rel="stylesheet" href="../assets/themes/dark.css" />
+    <link rel="stylesheet" href="../assets/skins/classic.css" />
+    <link rel="stylesheet" href="../assets/skins/glass.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="../assets/styles/fonts-loader.js"></script>
+  </head>
+  <body>
+    <div class="dl-shell" role="dialog" aria-labelledby="dlTitle">
+      <header class="dl-header">
+        <div class="dl-title-wrap">
+          <span class="dl-title-icon" aria-hidden="true">
+            <svg class="dl-title-svg" viewBox="0 0 24 24">
+              <use href="../assets/icons/mono.svg#download"></use>
+            </svg>
+          </span>
+          <h1 id="dlTitle" class="dl-title">Download history</h1>
+        </div>
+        <div class="dl-actions">
+          <div class="dl-search">
+            <input id="dlSearch" type="search" placeholder="Search downloads" aria-label="Search downloads" />
+          </div>
+          <button id="clearAll" class="dl-clear" type="button">Clear</button>
+        </div>
+      </header>
+
+      <main id="downloadList" class="dl-list" aria-live="polite">
+        <!-- items are rendered by app.js -->
+      </main>
+    </div>
+    <script type="module" src="../theme/themeBootstrap.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

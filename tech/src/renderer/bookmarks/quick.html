@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- bookmarks/quick.html: floating popup listing bookmarked tabs -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data: https:;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmarks</title>
+    <link rel="stylesheet" href="quick.css" />
+    <script defer src="../assets/styles/fonts-loader.js"></script>
+  </head>
+  <body>
+    <div class="bookmark-quick-shell" role="dialog" aria-labelledby="bookmarkQuickTitle">
+      <header class="bookmark-quick-header">
+        <div class="bookmark-quick-title" id="bookmarkQuickTitle">Bookmarks</div>
+      </header>
+      <div class="bookmark-quick-body">
+        <div class="bookmark-quick-section">
+          <div class="bookmark-quick-section-title">Bookmarks bar</div>
+          <div id="bookmarkQuickBar" class="bookmark-quick-list" role="listbox" aria-label="Bookmarks bar"></div>
+        </div>
+        <div class="bookmark-quick-section">
+          <div class="bookmark-quick-section-title">Other bookmarks</div>
+          <div id="bookmarkQuickOther" class="bookmark-quick-list" role="listbox" aria-label="Other bookmarks"></div>
+        </div>
+        <div id="bookmarkQuickEmpty" class="bookmark-quick-empty">No bookmarks yet</div>
+      </div>
+    </div>
+
+    <script type="module" src="quick.js"></script>
+  </body>
+</html>

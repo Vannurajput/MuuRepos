@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-skin="glass">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muul Credential Studio</title>
+    <link rel="stylesheet" href="../assets/themes/light.css" />
+    <link rel="stylesheet" href="../assets/themes/dark.css" />
+    <link rel="stylesheet" href="../assets/skins/classic.css" />
+    <link rel="stylesheet" href="../assets/skins/glass.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="../assets/styles/fonts-loader.js"></script>
+  </head>
+  <body>
+    <div class="manager-shell">
+      <header class="manager-header">
+        <h1 class="manager-title">
+          <svg class="icon icon-lg" aria-hidden="true">
+            <use href="../assets/icons/mono.svg#lock"></use>
+          </svg>
+          Muul Credential Studio
+        </h1>
+        <p class="manager-subtitle">Securely organize keys, tokens, and connection profiles in one place.</p>
+      </header>
+      <section class="manager-body">
+        <div class="table-container">
+          <div class="table-toolbar">
+            <div class="header-left">
+              <button id="addConfigButton" class="add-config-btn" type="button">
+                <svg class="icon" aria-hidden="true">
+                  <use href="../assets/icons/mono.svg#plus"></use>
+                </svg>
+                <span>Add Config</span>
+                <svg class="icon" aria-hidden="true">
+                  <use href="../assets/icons/mono.svg#chevron-down"></use>
+                </svg>
+              </button>
+              <div id="addConfigMenu" class="add-config-menu" role="menu" aria-hidden="true">
+                <button type="button" data-type="git">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/icons/mono.svg#code"></use></svg>
+                  Git
+                </button>
+                <button type="button" data-type="printer">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/icons/mono.svg#print"></use></svg>
+                  Printer
+                </button>
+                <button type="button" data-type="database">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/icons/mono.svg#database"></use></svg>
+                  Database
+                </button>
+                <button type="button" data-type="local">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/icons/mono.svg#folder"></use></svg>
+                  Local
+                </button>
+                <button type="button" data-type="other">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/icons/mono.svg#settings"></use></svg>
+                  Other
+                </button>
+              </div>
+            </div>
+            <label class="search-group" aria-label="Search credentials">
+              <input id="searchBox" type="search" placeholder="Search credentials" />
+              <svg class="icon" aria-hidden="true">
+                <use href="../assets/icons/mono.svg#search"></use>
+              </svg>
+            </label>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th class="col-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="credentialRows"></tbody>
+            </table>
+            <p id="statusMessage" class="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+      <footer class="manager-footer"></footer>
+    </div>
+
+    <!-- Local config modal -->
+    <div id="localModal" class="modal" aria-hidden="true">
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="localModalTitle">
+        <header class="modal-header">
+          <div>
+            <p class="modal-eyebrow">Add Local Config</p>
+            <h3 id="localModalTitle">Save to local disk</h3>
+          </div>
+          <button id="localModalClose" class="icon-btn ghost" aria-label="Close local config">
+            <svg class="icon" aria-hidden="true">
+              <use href="../assets/icons/mono.svg#close"></use>
+            </svg>
+          </button>
+        </header>
+        <form id="localForm" class="modal-body">
+          <label class="field">
+            <span>Folder name</span>
+            <input id="localFolder" type="text" name="folder" placeholder="e.g. Assets Backup" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>Path</span>
+            <input id="localPath" type="text" name="path" placeholder="C:\\projects\\exports" autocomplete="off" required />
+          </label>
+          <div id="localError" class="field-error" role="alert" aria-live="polite"></div>
+          <div class="modal-actions">
+            <button type="button" id="localCancel" class="btn ghost">Cancel</button>
+            <button type="submit" id="localSave" class="btn primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Inline editor modal (Git, Database, etc) -->
+    <div id="editorModal" class="editor-modal" aria-hidden="true">
+      <div class="editor-dialog" role="dialog" aria-modal="true" aria-labelledby="editorTitle">
+        <header class="editor-header">
+          <div class="editor-heading">
+            <p class="editor-eyebrow">Edit config</p>
+            <h3 id="editorTitle" class="editor-title">Editor</h3>
+          </div>
+        </header>
+        <div class="editor-body">
+          <div class="editor-card">
+            <button id="editorClose" class="editor-card-close" type="button" aria-label="Close editor">
+              <svg class="icon" aria-hidden="true">
+                <use href="../assets/icons/mono.svg#close"></use>
+              </svg>
+            </button>
+            <iframe
+              id="editorFrame"
+              class="editor-frame"
+              title="Credential editor"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="../theme/themeBootstrap.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

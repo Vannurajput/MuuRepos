@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-skin="glass">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Other Credential</title>
+    <link rel="stylesheet" href="../assets/themes/light.css" />
+    <link rel="stylesheet" href="../assets/themes/dark.css" />
+    <link rel="stylesheet" href="../assets/skins/classic.css" />
+    <link rel="stylesheet" href="../assets/skins/glass.css" />
+    <link rel="stylesheet" href="../assets/styles/fonts.css" />
+    <link rel="stylesheet" href="other.css" />
+    <script defer src="../assets/styles/fonts-loader.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="other-shell">
+        <header class="other-header">
+          <div>
+            <h1>Add Other Credential</h1>
+            <p>Capture custom credentials or tokens not covered by Git/Database flows.</p>
+          </div>
+          <button id="otherClose" class="close-btn" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </header>
+
+        <form id="otherForm" class="other-form">
+          <label>
+            Label
+            <input id="otherLabel" type="text" placeholder="e.g. Service API Key" required />
+          </label>
+
+          <label>
+            Description
+            <input id="otherDescription" type="text" placeholder="Optional notes" />
+          </label>
+
+          <label>
+            Secret / Value
+            <textarea id="otherSecret" rows="4" placeholder="Paste or type here"></textarea>
+          </label>
+
+          <div class="form-footer">
+            <button type="button" id="cancelOther" class="btn ghost">Cancel</button>
+            <button type="submit" class="btn primary">Save</button>
+          </div>
+
+          <p class="disclaimer" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="../theme/themeBootstrap.js"></script>
+    <script defer src="other.js"></script>
+  </body>
+</html>

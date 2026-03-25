@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-skin="glass">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local Config</title>
+  <link rel="stylesheet" href="../assets/themes/light.css" />
+  <link rel="stylesheet" href="../assets/themes/dark.css" />
+  <link rel="stylesheet" href="../assets/skins/classic.css" />
+  <link rel="stylesheet" href="../assets/skins/glass.css" />
+  <link rel="stylesheet" href="../assets/styles/fonts.css" />
+  <link rel="stylesheet" href="local.css" />
+  <script defer src="../assets/styles/fonts-loader.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="local-shell">
+      <header class="local-header">
+        <div>
+          <p class="eyebrow">Add Local Config</p>
+          <h1>Save to local disk</h1>
+          <p class="lede">Store a folder name and a path so you can push/pull locally.</p>
+        </div>
+      </header>
+
+      <form id="localForm" class="local-form">
+        <label class="field with-icon">
+          <span>Folder name</span>
+          <div class="input-shell">
+            <span class="input-icon leading material-icons">folder</span>
+            <input id="localFolder" type="text" placeholder="e.g. Assets Backup" autocomplete="off" />
+          </div>
+        </label>
+
+        <label class="field with-icon">
+          <span>Path <strong>*</strong></span>
+          <div class="input-shell">
+            <span class="input-icon leading material-icons">folder_open</span>
+            <input id="localPath" type="text" placeholder="C:\\projects\\exports" autocomplete="off" required />
+          </div>
+        </label>
+
+        <div id="localError" class="field-error" role="alert" aria-live="polite"></div>
+
+        <div class="actions">
+          <button type="button" id="localCancel" class="btn ghost">Cancel</button>
+          <button type="submit" class="btn primary">Save</button>
+        </div>
+
+        <p id="localLog" class="log" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="../theme/themeBootstrap.js"></script>
+  <script defer src="local.js"></script>
+</body>
+</html>

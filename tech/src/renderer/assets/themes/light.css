@@ -1,0 +1,45 @@
+:root {
+  color-scheme: light;
+  --app-font: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --app-bg: var(--bg-gradient, linear-gradient(180deg, #f6f8fb 0%, #eef2f7 52%, #e8f0ee 100%));
+  --app-surface: var(--tab-active, #ffffff);
+  --app-surface-2: var(--tab, #f8fafc);
+  --app-surface-3: #eef2f6;
+  --app-border: var(--border, #e2e8f0);
+  --app-border-strong: var(--border-strong, #d6dde7);
+  --app-text: var(--text, #111827);
+  --app-text-muted: var(--muted, #5b6676);
+  --app-text-soft: #8a93a3;
+  --app-accent: var(--accent, #2563eb);
+  --app-accent-strong: var(--accent-alt, #1d4ed8);
+  --app-accent-glow: rgba(37, 99, 235, 0.16);
+  --app-success: #0f766e;
+  --app-success-bg: rgba(15, 118, 110, 0.12);
+  --app-danger: #dc2626;
+  --app-danger-bg: rgba(220, 38, 38, 0.14);
+  --app-shadow-sm: 0 6px 18px rgba(16, 24, 40, 0.08);
+  --app-shadow-md: 0 16px 40px rgba(16, 24, 40, 0.12);
+  --app-shadow-lg: 0 26px 60px rgba(16, 24, 40, 0.18);
+  --app-hover: rgba(37, 99, 235, 0.08);
+  --app-overlay: rgba(15, 23, 42, 0.28);
+  --app-focus-ring: rgba(37, 99, 235, 0.22);
+
+  --cm-font: var(--app-font);
+  --cm-page-bg: var(--app-bg);
+  --cm-surface: var(--app-surface);
+  --cm-surface-2: var(--app-surface-2);
+  --cm-surface-3: var(--app-surface-3);
+  --cm-border: var(--app-border);
+  --cm-border-strong: var(--app-border-strong);
+  --cm-text: var(--app-text);
+  --cm-text-muted: var(--app-text-muted);
+  --cm-text-soft: var(--app-text-soft);
+  --cm-accent: var(--app-accent);
+  --cm-accent-strong: var(--app-accent-strong);
+  --cm-success: var(--app-success);
+  --cm-success-bg: var(--app-success-bg);
+  --cm-shadow-sm: var(--app-shadow-sm);
+  --cm-shadow-md: var(--app-shadow-md);
+  --cm-shadow-lg: var(--app-shadow-lg);
+  --cm-hover: var(--app-hover);
+}

@@ -1,0 +1,316 @@
+.scheduler-shell {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 0 20px 32px;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text-primary, #0f172a);
+}
+
+.scheduler-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.scheduler-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  color: #6b7280;
+  margin: 0 0 6px 0;
+}
+
+.scheduler-title {
+  font-size: 32px;
+  margin: 0;
+}
+
+.scheduler-subtitle {
+  margin: 4px 0 0 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.scheduler-status {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 10px;
+  min-width: 240px;
+  font-size: 13px;
+}
+
+.scheduler-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.scheduler-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.full-span {
+  grid-column: 1 / -1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 10px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.job-form {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field.dual {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.field span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.field small {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  height: 44px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #d5dae5;
+  background: #fff;
+  font-size: 14px;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  box-sizing: border-box;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 90px;
+  height: auto;
+}
+
+.field-set {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  border: 1px dashed rgba(148, 163, 184, 0.6);
+  border-radius: 12px;
+  background: rgba(248, 250, 252, 0.6);
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: none;
+  border-color: #7b8bff;
+  box-shadow: 0 0 0 3px rgba(123, 139, 255, 0.2);
+}
+
+.hidden {
+  display: none;
+}
+
+.primary-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: linear-gradient(120deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(99, 102, 241, 0.3);
+}
+
+.jobs-list {
+  display: grid;
+  gap: 8px;
+}
+
+.jobs-empty {
+  border: 1px dashed rgba(148, 163, 184, 0.4);
+  border-radius: 12px;
+  padding: 16px;
+  color: #475569;
+  background: rgba(248, 250, 252, 0.7);
+}
+
+.job-row {
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(248, 250, 252, 0.9);
+}
+
+.job-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.job-name {
+  font-weight: 700;
+}
+
+.job-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #475569;
+}
+
+.job-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.job-actions button {
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  border-radius: 8px;
+  background: white;
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.badge.success {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #047857;
+}
+
+.badge.error {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #b91c1c;
+}
+
+.badge.off {
+  background: rgba(148, 163, 184, 0.15);
+  color: #475569;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.pill-ok {
+  background: rgba(16, 185, 129, 0.16);
+  color: #065f46;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.pill-warn {
+  background: rgba(234, 179, 8, 0.16);
+  color: #92400e;
+  border-color: rgba(234, 179, 8, 0.3);
+}
+
+.pill-err {
+  background: rgba(239, 68, 68, 0.16);
+  color: #991b1b;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.alert {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+  color: #991b1b;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.log-list {
+  display: grid;
+  gap: 6px;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.log-row {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.log-row small {
+  color: #6b7280;
+}
+
+@media (max-width: 720px) {
+  .scheduler-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

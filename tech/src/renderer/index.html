@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<!-- index.html: Renders the renderer UI shell for the custom browser. -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self';" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MuulBrowser</title>
+  <link rel="stylesheet" href="assets/styles/main.css" />
+  <link rel="stylesheet" href="assets/skins/classic.css" />
+  <link rel="stylesheet" href="assets/skins/glass.css" />
+  <script defer src="assets/styles/fonts-loader.js"></script>
+</head>
+
+<body>
+  <div class="app-shell">
+    <div class="chrome">
+      <header class="header">
+        <div class="header-inner">
+          <!-- Tabs row with window controls -->
+          <div class="tab-row-container">
+            <div class="nav-top-row">
+              <!-- [FIX DRAG] left drag gutter so there is always draggable area -->
+              <div class="drag-spacer" aria-hidden="true"></div>
+
+              <div class="tab-section">
+                <div id="tabStrip" aria-label="Browser Tabs">
+                  <div class="tab-wrapper" style="flex: 0 1 190px;">
+                    <div class="tab active" draggable="true">
+                      <span class="tab-favicon">N</span>
+                      <span class="tab-title">New Tab</span>
+                      <button class="tab-close" title="Close Tab">&times;</button>
+                    </div>
+                  </div>
+                </div>
+
+                <button id="newTabButton" class="tab-new-btn" title="New Tab" aria-label="New tab">
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#plus"></use>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- [FIX DRAG] right drag gutter so clicks near the corner drag the window -->
+              <div class="drag-spacer" aria-hidden="true"></div>
+
+              <!-- Window controls anchored on the right of the tab row -->
+              <div class="window-controls">
+                <button id="winMinimize" class="window-control-btn" aria-label="Minimize window">
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#window-minimize"></use>
+                  </svg>
+                </button>
+                <button id="winMaxRestore" class="window-control-btn" aria-label="Maximize or restore window">
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#window-maximize"></use>
+                  </svg>
+                </button>
+                <button id="winClose" class="window-control-btn danger" aria-label="Close window">
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#close"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation toolbar row -->
+          <div class="address-row-container">
+            <div class="browser-toolbar">
+              <div class="toolbar-left address-row">
+                <button id="backButton" class="nav-btn" aria-label="Go Back" disabled>
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#arrow-left"></use>
+                  </svg>
+                </button>
+                <button id="forwardButton" class="nav-btn" aria-label="Go Forward" disabled>
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#arrow-right"></use>
+                  </svg>
+                </button>
+                <button id="reloadButton" class="nav-btn" aria-label="Reload">
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#refresh"></use>
+                  </svg>
+                </button>
+                <div class="address-wrapper">
+                  <div class="address-logo" aria-hidden="true">
+                    <svg class="address-logo-icon" viewBox="0 0 32 32" role="presentation" focusable="false">
+                      <defs>
+                        <linearGradient id="logoGradient" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stop-color="#0f766e" />
+                          <stop offset="100%" stop-color="#b98b2f" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M6 24V8l10 10L26 8v16" fill="none" stroke="url(#logoGradient)" stroke-width="2.8"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M10 22V12l6 6 6-6v10" fill="none" stroke="url(#logoGradient)" stroke-width="1.6"
+                        stroke-linecap="round" stroke-linejoin="round" opacity="0.6" />
+                    </svg>
+                  </div>
+                  <button id="addressSecurity" class="address-security" type="button" aria-label="Connection security"
+                    title="Connection security" aria-expanded="false">
+                    <svg class="toolbar-icon" aria-hidden="true">
+                      <use href="assets/icons/mono.svg#lock"></use>
+                    </svg>
+                  </button>
+                  <!-- Address input plus inline actions -->
+                  <input id="addressBar" type="text" placeholder="Search the web or type a URL" spellcheck="false"
+                    autocomplete="off" />
+                  <div id="addressSuggestions" class="suggestions-list" role="listbox" aria-label="Address suggestions">
+                  </div>
+                  <div class="address-actions">
+                    <button id="bookmarkStar" class="address-icon bare" title="Add bookmark" aria-label="Add bookmark">
+                      <svg class="toolbar-icon" aria-hidden="true">
+                        <use href="assets/icons/mono.svg#star"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="toolbar-right">
+                <div id="handshakeBadge" class="handshake-badge handshake-missing" aria-live="polite">
+                  No Codex Handshake
+                </div>
+                <button id="profileButton" class="nav-icon profile-btn" title="Profile" aria-label="Profile">
+                  <svg class="profile-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="9" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M5 19c0-3.5 3.1-5 7-5s7 1.5 7 5" fill="none" stroke="currentColor" stroke-width="1.6"
+                      stroke-linecap="round" />
+                  </svg>
+                </button>
+                <!-- Downloads button to open the downloads popup -->
+                <button id="downloadButton" class="nav-icon small" title="Downloads" aria-label="Downloads">
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#download"></use>
+                  </svg>
+                </button>
+                <button id="githubButton" class="nav-icon small github" title="Open GitHub"
+                  aria-label="Open GitHub login">
+                  <svg viewBox="0 0 16 16" role="presentation" focusable="false">
+                    <path
+                      d="M8 .5C3.86.5.5 3.86.5 8c0 3.3 2.14 6.08 5.11 7.07.37.07.5-.16.5-.35v-1.23c-2.08.45-2.52-.9-2.52-.9-.34-.87-.82-1.1-.82-1.1-.67-.46.05-.45.05-.45.75.05 1.14.77 1.14.77.66 1.13 1.73.8 2.15.62.07-.48.26-.8.47-.98-1.66-.19-3.41-.83-3.41-3.69 0-.82.29-1.48.76-2-.08-.19-.33-.96.07-2 0 0 .63-.2 2.06.77a7.09 7.09 0 0 1 3.76 0c1.43-.97 2.06-.77 2.06-.77.4 1.04.15 1.81.07 2 .47.52.76 1.18.76 2 0 2.86-1.76 3.5-3.43 3.69.27.23.5.68.5 1.38v2.04c0 .19.12.43.5.35C13.36 14.08 15.5 11.3 15.5 8 15.5 3.86 12.14.5 8 .5Z"
+                      fill="currentColor" />
+                  </svg>
+                </button>
+
+                <button id="settingsButton" class="nav-icon small" title="Settings" aria-label="Settings">
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#dots-vertical"></use>
+                  </svg>
+                </button>
+                <button id="chatToggle" class="nav-icon small" title="AI Chat" aria-label="AI Chat">
+                  <svg class="toolbar-icon" aria-hidden="true">
+                    <use href="assets/icons/mono.svg#message"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="bookmarkBar" class="bookmark-bar" hidden>
+            <div class="bookmark-bar-left">
+              <button id="bookmarkAppsButton" class="bookmark-bar-icon" title="Apps">&#9638;</button>
+            </div>
+            <div id="allBookmarksPanel" class="all-bookmarks-panel" hidden>
+              <div class="all-bookmarks-header">Open side panel to see all Bookmarks</div>
+              <div id="allBookmarksList" class="all-bookmarks-list"></div>
+            </div>
+            <div id="bookmarkBarItems" class="bookmark-bar-items"></div>
+            <div class="bookmark-bar-right">
+              <button id="bookmarkOverflowButton" class="bookmark-bar-icon" title="All bookmarks">&#187;</button>
+              <button id="bookmarkAllButton" class="bookmark-bar-icon" title="All bookmarks">&#128193;</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="start-hero">
+          <div class="hero-decoration-top"></div>
+
+          <div class="hero-branding">
+            <p class="hero-kicker">Powered by Muul Origins</p>
+            <div class="hero-logo-icon">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="logoGradientHero" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#0f766e" />
+                    <stop offset="100%" stop-color="#b98b2f" />
+                  </linearGradient>
+                </defs>
+                <rect x="6" y="6" width="52" height="52" rx="10" fill="url(#logoGlass)"
+                  stroke="rgba(15, 118, 110, 0.35)" stroke-width="2" />
+                <path d="M14 46V18l18 18 18-18v28" fill="none" stroke="url(#logoGradientHero)" stroke-width="4.5"
+                  stroke-linecap="square" stroke-linejoin="miter" />
+                <path d="M20 44V24l12 12 12-12v20" fill="none" stroke="url(#logoGradientHero)" stroke-width="2.5"
+                  stroke-linecap="square" stroke-linejoin="miter" opacity="0.5" />
+                <defs>
+                  <linearGradient id="logoGlass" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#fbf6eb" stop-opacity="0.95" />
+                    <stop offset="100%" stop-color="#ecf4f3" stop-opacity="0.75" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <h1 class="hero-logo">MOBROWSER</h1>
+            <p class="hero-tagline">Fast Modern Open Web Browser.</p>
+            <p class="hero-subtitle">An exclusive, curated window into the open web.</p>
+          </div>
+
+          <form class="center-address" id="centerAddressForm">
+            <svg class="address-search-icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input id="centerAddressBar" type="text" placeholder="Search the web or type a URL" spellcheck="false"
+              autocomplete="off" />
+            <div id="centerSuggestions" class="suggestions-list" role="listbox" aria-label="Suggestions"></div>
+          </form>
+
+          <div class="hero-shortcuts">
+            <div id="shortcutGrid" class="shortcut-grid">
+            </div>
+          </div>
+
+          <section class="hero-apps" aria-label="MoBrowser app suite">
+            <div class="apps-header">
+              <p class="apps-kicker">Exclusive Suite</p>
+              <h2 class="apps-title">Apps built in for momentum</h2>
+              <p class="apps-subtitle">Everything you need, already inside MoBrowser.</p>
+            </div>
+            <div class="apps-grid">
+              <article class="app-tile app-credentials">
+                <div class="app-tile-header">
+                  <div class="app-icon">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="assets/icons/mono.svg#lock"></use>
+                    </svg>
+                  </div>
+                  <h3>Credential Manager</h3>
+                </div>
+                <p>Securely store tokens, keys, and logins with local control.</p>
+                <span class="app-meta">Encrypted local vault</span>
+              </article>
+              <article class="app-tile app-downloads">
+                <div class="app-tile-header">
+                  <div class="app-icon">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="assets/icons/mono.svg#download"></use>
+                    </svg>
+                  </div>
+                  <h3>Downloads Hub</h3>
+                </div>
+                <p>Track, resume, and reopen files from a single command deck.</p>
+                <span class="app-meta">Smart queues</span>
+              </article>
+              <article class="app-tile app-print">
+                <div class="app-tile-header">
+                  <div class="app-icon">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="assets/icons/mono.svg#print"></use>
+                    </svg>
+                  </div>
+                  <h3>Print Studio</h3>
+                </div>
+                <p>Fine tune layouts and print with confident previews.</p>
+                <span class="app-meta">Precision output</span>
+              </article>
+              <article class="app-tile app-git">
+                <div class="app-tile-header">
+                  <div class="app-icon">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="assets/icons/mono.svg#code"></use>
+                    </svg>
+                  </div>
+                  <h3>Git Sync</h3>
+                </div>
+                <p>Push snapshots and sync workspaces without leaving the tab.</p>
+                <span class="app-meta">One-click commits</span>
+              </article>
+              <article class="app-tile app-data">
+                <div class="app-tile-header">
+                  <div class="app-icon">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="assets/icons/mono.svg#database"></use>
+                    </svg>
+                  </div>
+                  <h3>Data Vault</h3>
+                </div>
+                <p>Browse local and remote data with rapid access controls.</p>
+                <span class="app-meta">Secure connectors</span>
+              </article>
+              <article class="app-tile app-bookmarks">
+                <div class="app-tile-header">
+                  <div class="app-icon">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="assets/icons/mono.svg#star"></use>
+                    </svg>
+                  </div>
+                  <h3>Bookmarks Studio</h3>
+                </div>
+                <p>Curate, tag, and pin your favorite destinations fast.</p>
+                <span class="app-meta">Instant recall</span>
+              </article>
+            </div>
+          </section>
+
+          <div class="hero-decoration-bottom"></div>
+        </div>
+      </main>
+
+      <div id="shortcutModal" class="shortcut-modal" hidden>
+        <div class="shortcut-modal-panel" role="dialog" aria-modal="true" aria-labelledby="shortcutModalTitle">
+          <header class="shortcut-modal-header">
+            <div class="shortcut-modal-heading">
+              <span class="shortcut-modal-icon" aria-hidden="true">
+                <svg class="toolbar-icon">
+                  <use href="assets/icons/mono.svg#plus"></use>
+                </svg>
+              </span>
+              <h3 id="shortcutModalTitle">Add shortcut</h3>
+            </div>
+            <button type="button" id="shortcutModalClose" aria-label="Close">
+              <svg class="toolbar-icon" aria-hidden="true">
+                <use href="assets/icons/mono.svg#close"></use>
+              </svg>
+            </button>
+          </header>
+          <form id="shortcutForm" class="shortcut-form">
+            <label class="shortcut-field">
+              <span class="shortcut-field-label">
+                <svg class="toolbar-icon" aria-hidden="true">
+                  <use href="assets/icons/mono.svg#star"></use>
+                </svg>
+                Name
+              </span>
+              <input id="shortcutNameInput" type="text" required maxlength="40" autocomplete="off" />
+            </label>
+            <label class="shortcut-field">
+              <span class="shortcut-field-label">
+                <svg class="toolbar-icon" aria-hidden="true">
+                  <use href="assets/icons/mono.svg#search"></use>
+                </svg>
+                URL
+              </span>
+              <input id="shortcutUrlInput" type="url" required placeholder="https://example.com" />
+            </label>
+            <div class="shortcut-actions">
+              <button type="button" id="shortcutCancel">Cancel</button>
+              <button type="submit" id="shortcutSave">Done</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="bookmarkModal" class="bookmark-modal" hidden>
+        <div class="bookmark-modal-panel" role="dialog" aria-modal="true" aria-labelledby="bookmarkModalTitle">
+          <header class="bookmark-modal-header">
+            <div>
+              <p class="bookmark-modal-eyebrow">Bookmark</p>
+              <h3 id="bookmarkModalTitle">Add bookmark</h3>
+            </div>
+            <button type="button" id="bookmarkModalClose" aria-label="Close">×</button>
+          </header>
+          <form id="bookmarkForm" class="bookmark-form">
+            <label>
+              Name
+              <input id="bookmarkNameInput" type="text" autocomplete="off" />
+            </label>
+            <label>
+              Folder
+              <select id="bookmarkFolderSelect">
+                <option value="bar">Bookmarks bar</option>
+                <option value="other">Other bookmarks</option>
+              </select>
+            </label>
+            <div class="bookmark-modal-actions">
+              <button type="button" id="bookmarkRemoveButton" class="ghost" hidden>Remove</button>
+              <div class="spacer"></div>
+              <button type="button" id="bookmarkCancelButton" class="ghost">Cancel</button>
+              <button type="submit" id="bookmarkSaveButton" class="primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <aside id="chatDrawer" class="chat-drawer">
+        <header class="chat-header">
+          <div class="chat-title">AI Chat</div>
+          <button id="chatClose" class="chat-close" aria-label="Close chat">×</button>
+        </header>
+        <div id="chatMessages" class="chat-messages"></div>
+        <form id="chatForm" class="chat-input-row">
+          <input id="chatInput" type="text" placeholder="Ask anything..." autocomplete="off" />
+          <button id="chatSend" type="submit">Send</button>
+        </form>
+        <div id="chatStatus" class="chat-status" hidden>Thinking…</div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Floating actions (bottom-right) -->
+  <div class="floating-actions" aria-label="Quick actions">
+    <button id="heroAddShortcut" class="floating-action shortcut-fab" aria-label="Add shortcut" title="Add shortcut">
+      <svg class="toolbar-icon" aria-hidden="true">
+        <use href="assets/icons/mono.svg#plus"></use>
+      </svg>
+    </button>
+    <button id="themeToggle" class="floating-action theme-toggle" aria-label="Toggle light/dark mode"
+      title="Toggle light/dark mode">
+      <svg class="toolbar-icon theme-icon" aria-hidden="true">
+        <use href="assets/icons/mono.svg#sun"></use>
+      </svg>
+    </button>
+  </div>
+
+  <script type="module" src="scripts/app.js"></script>
+  <script src="scripts/profileUI.js"></script>
+  <script type="module" src="scripts/components/themeToggle.js"></script>
+  <script type="module" src="scripts/components/windowControls.js"></script>
+</body>
+
+</html>

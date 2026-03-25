@@ -1,0 +1,267 @@
+/* downloads/styles.css – Downloads popup styled like History, no action button */
+
+/* base */
+:root{
+  font-family: var(--app-font, 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, system-ui, sans-serif);
+  color: var(--app-text);
+  background: var(--app-bg);
+}
+*{ box-sizing:border-box; }
+
+/* hide outer scrollbar */
+html,body{ height:100%; overflow:hidden; }
+body{ margin:0; background: var(--app-bg); color: var(--app-text); }
+html::-webkit-scrollbar, body::-webkit-scrollbar{ width:0; height:0; display:none; }
+
+/* ✅ FIX: remove the “outer light box/border” around the popup
+   Reason: .dl-shell has margin in popup mode, so the area outside the card shows HTML/:root background.
+   Making HTML + body background transparent in popup mode removes that outer box. */
+html{ background: transparent; } /* overrides :root background paint */
+body:not(.full-tab){
+  background: transparent !important;
+}
+
+/* shell */
+.dl-shell{ 
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--app-surface);
+  border-radius: 15px;
+  border: 1.3px solid var(--app-border-strong);
+  box-shadow: none;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  scrollbar-width:none;    
+}
+
+/* .dl-shell::-webkit-scrollbar{ width:0; height:0; display:none; } */
+
+/* header */
+.dl-header{
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  background: var(--app-surface);
+  border-bottom: 1px solid var(--app-border-strong);
+  backdrop-filter: saturate(140%) blur(8px);
+}
+.dl-title-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.dl-title-icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--app-border);
+  background: var(--app-accent-glow);
+  color: var(--app-accent-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px var(--app-accent-glow);
+}
+.dl-title-svg{
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.dl-title{
+  margin:0;
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:.2px;
+  color: var(--app-text);
+}
+.dl-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.dl-search input{
+  width: 220px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--app-border);
+  padding: 8px 12px;
+  font-size: 14px;
+  background: var(--app-surface);
+  color: var(--app-text);
+}
+.dl-search input:focus{
+  outline: none;
+  border-color: var(--app-border-strong);
+  box-shadow: 0 0 0 3px var(--app-focus-ring);
+}
+.dl-clear{
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--app-text);
+}
+.dl-clear:hover{
+  background: var(--app-surface-2);
+}
+
+/* Popup view: hide search + clear */
+body:not(.full-tab) .dl-actions{
+  display: none;
+}
+body:not(.full-tab) .dl-title{
+  font-size: 16px;
+}
+body:not(.full-tab) .dl-header{
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+/* list */
+.dl-list{
+  flex:1;
+  overflow-y:auto;
+  padding: 8px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--app-surface);
+
+  scrollbar-width:thin;
+  scrollbar-color: var(--app-border-strong) transparent;
+  overscroll-behavior: contain;
+}
+.dl-list::-webkit-scrollbar{ width:6px; }
+.dl-list::-webkit-scrollbar-thumb{ background:var(--app-border-strong); border-radius:3px; }
+.dl-list::-webkit-scrollbar-track{ background:transparent; }
+
+/* download item card */
+.dl-item{
+  width:100%;
+  border:1px solid var(--app-border);
+  border-radius:10px;
+  background: var(--app-surface);
+  padding:8px 10px;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  transition:border-color .15s, box-shadow .15s, transform .04s;
+}
+.dl-item:hover{ border-color:var(--app-border-strong); box-shadow:none; }
+.dl-item:active{ transform: translateY(1px); }
+
+.dl-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+.dl-icon{
+  flex:0 0 30px;
+  height:30px; width:30px;
+  border-radius:8px;
+  border:1px solid var(--app-border);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--app-accent-strong);
+  background: var(--app-accent-glow);
+  box-shadow: inset 0 0 0 1px var(--app-border);
+}
+.dl-icon-error{
+  color: var(--app-danger);
+  background: var(--app-danger-bg);
+  border-color: var(--app-danger-bg);
+}
+.dl-file-icon{
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+.dl-meta{ min-width:0; }
+.dl-name{
+  font-size:13px; font-weight:600; color:var(--app-text);
+  white-space:normal;
+  word-break:break-all;
+  overflow:visible;
+}
+.dl-sub{
+  margin-top:3px; font-size:11px; color:var(--app-text-muted);
+  display:flex; gap:8px; align-items:center;
+}
+.dl-sub .status-error{ color:#e5484d; }
+.dl-dot{
+  width:4px; height:4px; border-radius:50%; background:var(--app-border);
+}
+
+.dl-row-actions{
+  margin-left:auto;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.row-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px;
+  border-radius:8px;
+  border:1px solid var(--app-border);
+  background: var(--app-surface);
+  color: var(--app-text-muted);
+  cursor:pointer;
+  transition: background .15s, border-color .15s, transform .05s;
+}
+.row-btn:hover{
+  background: var(--app-surface-2);
+  border-color: var(--app-border-strong);
+  color: var(--app-accent);
+}
+.row-btn:active{ transform: translateY(1px); }
+.dl-action-icon{
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.dl-progress{
+  margin-top:6px;
+  width:100%;
+  height:5px;
+  background: var(--app-border);
+  border-radius:6px;
+  overflow:hidden;
+}
+.dl-bar{
+  display:block;
+  height:100%;
+  background: var(--app-accent);
+  border-radius:inherit;
+}
+
+
+body:not(.full-tab) .dl-list{
+  scrollbar-width: none;
+}
+body:not(.full-tab) .dl-list::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Popup: hide remove button, keep folder, smaller action buttons */
+body:not(.full-tab) .dl-row-actions .row-btn[data-act="remove"]{
+  display: none;
+}
+body:not(.full-tab) .row-btn{
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1;
+}

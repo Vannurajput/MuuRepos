@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- GitHub configuration page used both inside popup and when opened as a full tab -->
+<html lang="en" data-theme="light" data-skin="glass">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Sync</title>
+    <link rel="stylesheet" href="../assets/themes/light.css" />
+    <link rel="stylesheet" href="../assets/themes/dark.css" />
+    <link rel="stylesheet" href="../assets/skins/classic.css" />
+    <link rel="stylesheet" href="../assets/skins/glass.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="../assets/styles/fonts-loader.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="window-shell">
+        <div class="window-header">
+          <div class="tabs">
+            <button id="tabConfig" class="tab active">Config</button>
+          </div>
+          <!-- <button id="closeButton" class="close-btn" aria-label="Close Git panel">&times;</button> -->
+        </div>
+
+        <section id="configPanel" class="panel active">
+          <div class="two-col">
+            <label>
+              Owner
+              <input id="ownerInput" type="text" placeholder="github-username" />
+            </label>
+            <label>
+              Repository
+              <input id="repoInput" type="text" placeholder="repo-name" />
+            </label>
+          </div>
+          <div class="two-col">
+            <label>
+              Branch
+              <input id="branchInput" type="text" placeholder="main" />
+            </label>
+            <label>
+              Default Path (in repository)
+              <input id="pathInput" type="text" placeholder="payloads/sample.file" />
+            </label>
+          </div>
+          <label>
+            Default Commit Message
+            <input id="commitMessageInput" type="text" placeholder="chore: push from Chromo" />
+          </label>
+          <label>
+            Personal Access Token (PAT)
+            <input id="patInput" type="password" autocomplete="off" placeholder="ghp_xxxxx" />
+          </label>
+          <p class="note">PATs are kept securely via keytar. Save before pushing or pulling.</p>
+          <div class="actions">
+            <button id="saveConfigButton" class="primary">Save &amp; Connect</button>
+            <button id="signOutButton" class="ghost">Sign out</button>
+          </div>
+          <p id="configStatus" class="status-chip">Not connected</p>
+        </section>
+
+      </div>
+    </div>
+    <script type="module" src="../theme/themeBootstrap.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

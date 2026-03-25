@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dialog</title>
+    <style>
+      :root {
+        --bg: #f5f3ff;
+        --panel: #ffffff;
+        --text: #1f2937;
+        --muted: #4b5563;
+        --primary: #5b21b6;
+        --shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 16px;
+        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        background: transparent;
+      }
+      .dialog {
+        background: var(--panel);
+        color: var(--text);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 16px;
+        min-width: 360px;
+      }
+      .title {
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 15px;
+      }
+      .message {
+        margin: 0 0 16px 0;
+        color: var(--muted);
+        white-space: pre-wrap;
+        line-height: 1.5;
+        font-size: 14px;
+      }
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+      button {
+        border: 1px solid transparent;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 14px;
+        cursor: pointer;
+        background: #eef2ff;
+        color: var(--text);
+      }
+      button.primary {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dialog">
+      <div class="title">Mobrowser</div>
+      <p class="message" id="dialogMessage"></p>
+      <div class="actions">
+        <button id="cancelBtn">Cancel</button>
+        <button id="okBtn" class="primary">OK</button>
+      </div>
+    </div>
+    <script>
+      const { ipcRenderer } = require('electron');
+      const msgEl = document.getElementById('dialogMessage');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const okBtn = document.getElementById('okBtn');
+
+      const respond = (value) => {
+        ipcRenderer.send('custom-dialog:response', value);
+        window.close();
+      };
+
+      cancelBtn.addEventListener('click', () => respond(false));
+      okBtn.addEventListener('click', () => respond(true));
+
+      ipcRenderer.on('custom-dialog:show', (_evt, payload = {}) => {
+        const { type = 'alert', message = '' } = payload;
+        msgEl.textContent = message;
+        const isConfirm = type === 'confirm';
+        cancelBtn.style.display = isConfirm ? 'inline-flex' : 'none';
+      });
+    </script>
+  </body>
+</html>

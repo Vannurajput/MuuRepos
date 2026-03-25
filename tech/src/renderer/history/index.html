@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- history/index.html: popup for recently visited pages -->
+<html lang="en" data-theme="light" data-skin="glass">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data:;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History</title>
+    <link rel="stylesheet" href="../assets/themes/light.css" />
+    <link rel="stylesheet" href="../assets/themes/dark.css" />
+    <link rel="stylesheet" href="../assets/skins/classic.css" />
+    <link rel="stylesheet" href="../assets/skins/glass.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="../assets/styles/fonts-loader.js"></script>
+  </head>
+  <body>
+    <div class="history-shell" role="dialog" aria-labelledby="historyTitle">
+      <div class="history-header">
+        <h3 id="historyTitle" class="history-title">History</h3>
+        <div class="history-actions">
+          <button id="clearHistory" class="clear-btn" aria-label="Clear history">Clear</button>
+        </div>
+      </div>
+
+      <div id="historyList" class="history-list"></div>
+    </div>
+
+    <script type="module" src="../theme/themeBootstrap.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

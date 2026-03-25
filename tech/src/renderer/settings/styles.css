@@ -1,0 +1,193 @@
+:root {
+  color-scheme: light;
+  font-family: var(--app-font, 'Roboto', 'Segoe UI', system-ui, sans-serif);
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ✅ FIX: popup window is transparent, so do not paint background behind the card */
+/* html,
+body {
+  background: transparent !important;
+}  */
+
+body {
+  margin: 0;
+  /* background: var(--app-bg);  <-- removed to avoid outer box */
+  color: var(--app-text);
+  overflow: hidden;
+  padding: 10px; /* keep your spacing */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.settings-shell {
+  /* width: 400px;
+  max-width: 400px; */
+  background: var(--app-surface);
+  border-radius: 16px;
+  padding: 6px;
+  border: 1px solid var(--app-border);
+  box-shadow: var(--app-shadow-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  max-height: 95vh;
+  min-height: 540px;
+  overflow: hidden;
+}
+
+.settings-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: calc(95vh - 22px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 10px;
+}
+
+.settings-content::-webkit-scrollbar {
+  width: 0;
+}
+.settings-content::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.settings-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 12px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.settings-row + .settings-row {
+  border-top: 1px solid var(--app-border);
+}
+
+.settings-row:hover {
+  background: var(--app-hover);
+}
+
+.settings-row-static {
+  cursor: default;
+}
+
+.settings-row-static:hover {
+  background: transparent;
+}
+
+.settings-row-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+}
+
+.settings-row-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface-2);
+  color: var(--app-text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.settings-icon {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+.settings-row:hover .settings-row-icon {
+  background: var(--app-surface-3);
+  border-color: var(--app-border-strong);
+  color: var(--app-accent);
+}
+
+.settings-row-static .settings-row-icon {
+  color: var(--app-text-muted);
+}
+
+.settings-row-title {
+  font-weight: 400;
+  color: var(--app-text);
+}
+
+.settings-row-meta {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--app-text-soft);
+  letter-spacing: 0.02em;
+}
+
+.settings-row-control {
+  display: flex;
+  align-items: center;
+}
+
+.settings-select {
+  border: 1px solid var(--app-border);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--app-surface-2);
+  color: var(--app-text);
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.settings-select:focus {
+  outline: none;
+  border-color: var(--app-accent);
+  box-shadow: 0 0 0 3px var(--app-focus-ring);
+  background: var(--app-surface);
+}
+
+.settings-zoom-btn {
+  border: 1px solid var(--app-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: var(--app-surface);
+  color: var(--app-text);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.settings-zoom-btn:hover {
+  background: var(--app-surface-2);
+  border-color: var(--app-border-strong);
+}
+
+.settings-zoom-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--app-focus-ring);
+}
+
+.settings-zoom-reset {
+  min-width: 64px;
+  text-align: center;
+}

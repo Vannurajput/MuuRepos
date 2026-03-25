@@ -1,0 +1,208 @@
+.profile-signin-shell {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #f5f7ff, #f0f4ff);
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+  -webkit-app-region: no-drag;
+  pointer-events: auto;
+}
+
+.signin-card {
+  width: 360px;
+  background: #fff;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
+  padding: 20px 22px;
+  -webkit-app-region: no-drag;
+  pointer-events: auto;
+}
+
+.signin-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.signin-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e6edf7;
+  color: #4b6b8f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+.signin-avatar svg {
+  width: 26px;
+  height: 26px;
+}
+
+.signin-eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+}
+
+.signin-title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.signin-sub {
+  margin: 4px 0 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.signin-mode-header {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.signin-mode-header .mode-title {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 16px;
+}
+.signin-mode-header .mode-sub {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.signin-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.signin-field {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: #475569;
+}
+
+.signin-field input {
+  width: 100%;
+  height: 44px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #d5dae5;
+  background: #fff;
+  font-size: 14px;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  box-sizing: border-box;
+}
+
+.signin-field input:focus {
+  outline: none;
+  border-color: #7b8bff;
+  box-shadow: 0 0 0 3px rgba(123, 139, 255, 0.2);
+}
+
+.signin-submit {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: linear-gradient(120deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.signin-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(99, 102, 241, 0.25);
+}
+
+.signin-divider {
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+  position: relative;
+  margin: 8px 0;
+}
+.signin-divider::before,
+.signin-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #e2e8f0;
+}
+.signin-divider::before { left: 0; }
+.signin-divider::after { right: 0; }
+.signin-divider span { background: #fff; padding: 0 8px; position: relative; }
+
+.signin-google {
+  border: 1px solid #d5dae5;
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: #fff;
+  color: #111827;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+.signin-google:hover {
+  transform: translateY(-1px);
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+.g-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.signin-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #475569;
+  justify-content: center;
+  margin-top: 4px;
+}
+.signin-foot a {
+  color: #6366f1;
+  font-weight: 700;
+  text-decoration: none;
+}
+.signin-foot a:hover {
+  text-decoration: underline;
+}
+
+.signin-error {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #991b1b;
+  font-size: 13px;
+}

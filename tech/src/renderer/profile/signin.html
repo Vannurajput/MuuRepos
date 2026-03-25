@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in</title>
+    <link rel="stylesheet" href="../assets/styles/main.css" />
+    <link rel="stylesheet" href="signin.css" />
+  </head>
+  <body class="profile-signin-shell">
+    <div class="signin-card" id="signinCard" data-mode="signin">
+      <header class="signin-header">
+        <div class="signin-avatar">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="9" r="4" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <path d="M5 19c0-3.5 3.1-5 7-5s7 1.5 7 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div>
+          <p class="signin-eyebrow">MuBrowser Account</p>
+          <h1 class="signin-title" id="cardTitle">Sign in</h1>
+          <p class="signin-sub" id="cardSubtitle">Sign in to personalize your profile.</p>
+        </div>
+      </header>
+
+      <form id="signinForm" class="signin-form">
+        <div id="formHeader" class="signin-mode-header" data-mode="signin">
+          <div class="mode-title">Sign in</div>
+          <div class="mode-sub">Sign in to personalize your profile.</div>
+        </div>
+
+        <label class="signin-field">
+          <span>Email</span>
+          <input id="signinEmail" type="email" required autocomplete="email" placeholder="you@example.com" />
+        </label>
+        <label class="signin-field">
+          <span>Password</span>
+          <input id="signinPassword" type="password" required autocomplete="current-password" placeholder="********" />
+        </label>
+        <div id="createOnlySection" hidden>
+          <div id="usernameField" class="signin-field">
+            <span>Username</span>
+            <input id="signinUsername" type="text" autocomplete="username" placeholder="yourname" />
+          </div>
+          <label class="signin-field" id="confirmPasswordField">
+            <span>Confirm password</span>
+            <input id="signinConfirmPassword" type="password" autocomplete="new-password" placeholder="********" />
+          </label>
+        </div>
+        <div id="signinError" class="signin-error" hidden></div>
+        <button type="submit" class="signin-submit" id="primarySubmit">Sign in</button>
+
+        <div class="signin-divider"><span>or</span></div>
+
+        <button type="button" id="googleSignIn" class="signin-google">
+          <span class="g-icon" aria-hidden="true">G</span>
+          <span>Sign in with Google</span>
+        </button>
+
+        <div class="signin-foot">
+          <span id="footPrompt">New here?</span>
+          <a id="createAccountLink" href="#">Create account</a>
+        </div>
+      </form>
+    </div>
+
+    <script type="module" src="signin.js"></script>
+  </body>
+</html>

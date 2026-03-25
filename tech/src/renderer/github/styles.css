@@ -1,0 +1,427 @@
+/* GitHub page styling shared between popup and tab view */
+:root {
+  font-family: var(--app-font, 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, system-ui, sans-serif);
+  color: var(--app-text);
+  background: var(--app-bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--app-bg);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Changed from center to flex-start */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Embedded (modal iframe) mode: remove the outer whitespace + avoid iframe scrollbars */
+html.embed {
+  height: auto;
+  background: transparent;
+}
+
+body.embed {
+  min-height: 0;
+  padding: 0;
+  height: auto;
+  align-items: center;
+  justify-content: flex-start; /* top-align so no extra top/bottom whitespace */
+  background: transparent;
+  overflow: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+body.embed::-webkit-scrollbar {
+  display: none;
+}
+
+body.embed .window-shell {
+  height: auto;
+}
+
+body.embed .window-header {
+  padding-top: 10px;
+}
+
+body.embed .panel {
+  overflow: visible;
+  padding: 14px 18px 8px;
+  gap: 12px;
+  flex: 0 0 auto; /* prevent flex:1 from creating empty space below content */
+}
+
+body.embed .actions {
+  margin-top: 6px;
+}
+
+body.embed .window-shell {
+  min-height: 0;
+}
+
+body.embed .status-chip {
+  position: static;
+  margin: 0 0 0 auto;
+  box-shadow: none;
+}
+
+body.embed .page-shell {
+  width: min(600px, 100%);
+  height: auto;
+}
+
+body.embed .note {
+  display: none;
+}
+
+/* Keep desktop-like 2-column layout inside modal card */
+body.embed .two-col {
+  grid-template-columns: 1fr 1fr;
+}
+
+body.embed .actions {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+body.embed .actions button {
+  width: auto;
+}
+
+@media (max-width: 520px) {
+  body.embed .two-col {
+    grid-template-columns: 1fr;
+  }
+  body.embed .actions {
+    flex-direction: column;
+  }
+  body.embed .actions button {
+    width: 100%;
+  }
+}
+
+body.embed input {
+  height: 36px;
+}
+
+body.embed button {
+  height: 36px;
+}
+
+.page-shell {
+  width: min(500px, 100%); /* Reduced from 960px to 500px */
+  display: flex;
+  justify-content: center;
+  position: relative; /* For positioning the status */
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 16px;
+  }
+}
+
+/* Card container - Made much smaller */
+.window-shell {
+  width: 100%;
+  background: var(--app-surface);
+  border-radius: 12px; /* Reduced from 18px */
+  border: 1px solid var(--app-border);
+  box-shadow: var(--app-shadow-md); /* Lighter shadow */
+  display: flex;
+  flex-direction: column;
+  min-height: auto; /* Removed fixed height */
+  overflow: hidden;
+}
+
+/* Top row containing tabs - removed close button space */
+.window-header {
+  display: flex;
+  justify-content: center; /* Center the tab */
+  align-items: center;
+  padding: 12px 24px 0; /* Reduced top padding from 16px to 12px */
+  border-bottom: 1px solid var(--app-border);
+}
+
+/* Hide close button completely */
+.close-btn {
+  display: none !important; /* Completely removed */
+}
+
+/* Tab selector - Simplified to match image */
+.tabs {
+  display: flex;
+  gap: 0; /* Remove gap for cleaner look */
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 32px; /* Reduced from 12px to 10px */
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--app-text-muted);
+  position: relative;
+  font-size: 15px;
+  margin: 0; /* Ensure no margin */
+}
+
+.tab.active {
+  background: var(--app-surface);
+  color: var(--app-accent); /* Theme color */
+  box-shadow: none;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--app-accent);
+  border-radius: 3px 3px 0 0;
+}
+
+/* Scrollable content panels - tighter spacing */
+.panel {
+  display: none;
+  flex-direction: column;
+  gap: 16px; /* Reduced from 20px */
+  padding: 20px 24px; /* Reduced top padding from 24px to 20px */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  flex: 1;
+}
+
+.panel.active {
+  display: flex;
+}
+
+.panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
+}
+
+/* Form label wrappers */
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  gap: 6px;
+  font-weight: 500;
+  color: var(--app-text);
+}
+
+/* Two column layout with smaller inputs */
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Reduced from 220px */
+  gap: 16px; /* Reduced from 20px */
+}
+
+/* Inputs - made shorter */
+input {
+  border: 1px solid var(--app-border);
+  border-radius: 8px; /* Reduced from 10px */
+  padding: 8px 12px; /* Reduced padding */
+  font-size: 14px;
+  flex: 1;
+  background: var(--app-surface-2);
+  transition: all 0.2s ease;
+  height: 38px; /* Fixed height for consistency */
+  box-sizing: border-box;
+}
+
+input:hover {
+  border-color: var(--app-border-strong);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--app-accent);
+  box-shadow: 0 0 0 2px var(--app-focus-ring); /* Reduced shadow */
+  background: var(--app-surface);
+}
+
+/* Buttons */
+button {
+  border-radius: 8px; /* Reduced from 10px */
+  border: none;
+  background: var(--app-surface-2);
+  cursor: pointer;
+  padding: 8px 18px; /* Slightly reduced */
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  height: 38px; /* Match input height */
+  box-sizing: border-box;
+}
+
+button.primary {
+  background: var(--app-accent); /* Solid theme color */
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(59, 130, 246, 0.3); /* Reduced shadow */
+}
+
+button.primary:hover {
+  background: var(--app-accent-strong);
+  box-shadow: 0 2px 5px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+button.ghost {
+  background: transparent;
+  border: 1px solid var(--app-border);
+  color: var(--app-text-muted);
+}
+
+button.ghost:hover {
+  background: var(--app-surface-2);
+  border-color: var(--app-border-strong);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px; /* Reduced from 10px */
+}
+
+.note {
+  font-size: 12px;
+  color: var(--app-text-soft);
+  margin: 4px 0 0 0; /* Reduced margin */
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Status chip for "Connected" status - Now positioned outside card */
+.status-chip {
+  position: absolute;
+  right: 0;
+  top: 100%; /* Position below the card */
+  margin-top: 12px;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: var(--app-success); /* Green for success */
+  color: #ffffff;
+  border: 1px solid var(--app-success);
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+/* Hide the status chip initially */
+.status-chip:empty {
+  display: none;
+}
+
+/* Field labels spacing */
+label + label {
+  margin-top: 0;
+}
+
+/* Adjust spacing between sections */
+.two-col + label {
+  margin-top: 0;
+}
+
+label + .note {
+  margin-top: 0;
+}
+
+.note + .actions {
+  margin-top: 16px;
+}
+
+/* Remove this rule since status is now outside */
+/* .actions + .status-chip {
+  margin-top: 16px;
+} */
+
+/* Make PAT input stand out */
+#patInput {
+  font-family: monospace;
+  letter-spacing: 1px;
+  font-size: 13px;
+}
+
+/* Input placeholders */
+input::placeholder {
+  color: var(--app-text-soft);
+  font-size: 13px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .page-shell {
+    width: min(450px, 100%);
+  }
+  
+  .two-col {
+    grid-template-columns: 1fr; /* Stack on mobile */
+    gap: 12px; /* Reduced gap */
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+  
+  .actions button {
+    width: 100%;
+  }
+  
+  /* Move status below on mobile */
+  .status-chip {
+    position: static;
+    margin-top: 16px;
+    align-self: center;
+    top: auto;
+    right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+  
+  .window-shell {
+    border-radius: 8px;
+  }
+  
+  .window-header {
+    padding: 10px 16px 0; /* Reduced padding */
+  }
+  
+  .panel {
+    padding: 18px 20px; /* Further reduced padding */
+    gap: 14px;
+  }
+  
+  .tab {
+    padding: 8px 20px; /* Reduced padding */
+    font-size: 14px;
+  }
+  
+  input {
+    padding: 7px 10px;
+    height: 36px;
+  }
+  
+  button {
+    padding: 7px 14px;
+    height: 36px;
+  }
+}
