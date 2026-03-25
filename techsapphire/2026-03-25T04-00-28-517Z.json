@@ -1,0 +1,16 @@
+{
+  "_kind": "browser-payload",
+  "_requestId": "exm_1774411228513_pkh13dnwx",
+  "_savedAt": "2026-03-25T04:00:28.517110300+00:00",
+  "git": {
+    "branch": "main",
+    "owner": "Vannurajput",
+    "repo": "MuuRepos"
+  },
+  "payload": {
+    "action": "deploy",
+    "branch": "main",
+    "repo": "my-app"
+  },
+  "requestId": "req-1774411228496"
+}
