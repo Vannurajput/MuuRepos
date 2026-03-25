@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoText - Dev Environment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Peer Dependencies for Demo App -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/min/vs/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sql.js@1.10.3/dist/sql-wasm.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://unpkg.com/prettier@3.3.2/standalone.js"></script>
+    <script src="https://unpkg.com/prettier@3.3.2/plugins/babel.js"></script>
+    <script src="https://unpkg.com/prettier@3.3.2/plugins/estree.js"></script>
+    <script src="https://unpkg.com/prettier@3.3.2/plugins/html.js"></script>
+    <script src="https://unpkg.com/prettier@3.3.2/plugins/typescript.js"></script>
+    <script src="https://unpkg.com/prettier@3.3.2/plugins/postcss.js"></script>
+    
+    <script>
+        // Init Monaco Loader
+        require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/min/vs' }});
+        
+        // Init sql.js
+        window.initSqlJs = initSqlJs;
+        
+        // Make Prettier plugins available on the window object for the formatting service
+        window.prettierPlugins = {
+            babel: prettierPlugins.babel,
+            estree: prettierPlugins.estree,
+            html: prettierPlugins.html,
+            typescript: prettierPlugins.typescript,
+            postcss: prettierPlugins.postcss,
+        };
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/jsx-dev-runtime": "https://aistudiocdn.com/react@^19.2.0/jsx-dev-runtime",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "webworker": "https://aistudiocdn.com/webworker@^0.8.4",
+    "@duckdb/duckdb-wasm": "https://aistudiocdn.com/@duckdb/duckdb-wasm@^1.30.0",
+    "fflate": "https://aistudiocdn.com/fflate@^0.8.2",
+    "vite": "https://aistudiocdn.com/vite@^7.1.9",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.0.4",
+    "vite-plugin-dts": "https://aistudiocdn.com/vite-plugin-dts@^4.5.4",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "url": "https://aistudiocdn.com/url@^0.11.4"
+  }
+}
+</script>
+</head>
+<body class="bg-gray-800 text-gray-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

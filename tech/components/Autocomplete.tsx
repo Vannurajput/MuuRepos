@@ -1,0 +1,2 @@
+// This component is not used and has been removed to avoid confusion.
+// It was part of an old custom editor implementation. The application now uses MonacoEditor, which provides its own autocomplete features.
