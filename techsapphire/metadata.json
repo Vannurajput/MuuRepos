@@ -1,0 +1,5 @@
+{
+  "name": "MoText",
+  "description": "A lightweight, browser-based text editor with syntax highlighting, a multi-tab interface, and persistent state saving, running entirely on the client-side.",
+  "requestFramePermissions": []
+}
