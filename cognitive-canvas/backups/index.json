@@ -1,6 +1,6 @@
 {
   "_kind": "browser-payload",
-  "_savedAt": "2026-03-26T04:04:49.485148700+00:00",
+  "_savedAt": "2026-03-26T04:05:50.862400500+00:00",
   "backups": [
     {
       "createdAt": "2026-03-25T04:34:30.379Z",
@@ -16,6 +16,11 @@
       "createdAt": "2026-03-26T04:04:47.311Z",
       "name": "cognitive-canvas-full-backup-2026-03-26.zip",
       "path": "cognitive-canvas/backups/data/cognitive-canvas-full-backup-2026-03-26.json"
+    },
+    {
+      "createdAt": "2026-03-26T04:05:48.647Z",
+      "name": "cognitive-canvas-full-backup-2026-03-26.zip",
+      "path": "cognitive-canvas/backups/data/cognitive-canvas-full-backup-2026-03-26.json"
     }
   ],
   "git": {
@@ -24,5 +29,5 @@
     "repo": "MuuRepos"
   },
   "indexKind": "cognitive-canvas-backup-index",
-  "updatedAt": "2026-03-26T04:04:49.484Z"
+  "updatedAt": "2026-03-26T04:05:50.861Z"
 }
